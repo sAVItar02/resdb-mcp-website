@@ -26,7 +26,7 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
         <div className="flex items-center justify-between">
           
           {/* Logo / Brand */}
-          <div className="flex-shrink-0">
+          <div className="shrink-0">
             <a href="#" className="text-xl font-bold tracking-tight text-gray-900 flex items-center gap-2">
               <div className="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center text-white">
                 <Database className="w-4 h-4" />

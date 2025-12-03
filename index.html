@@ -4,33 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ResilientDB MCP Server</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind is built locally via Vite/PostCSS -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-            },
-            colors: {
-              warm: {
-                50: '#FDFBF7',  /* Cosmic Latte - Main BG */
-                100: '#F7F4EB', /* Isabelline - Section BG */
-                200: '#EBE7DE', /* Bone - Borders */
-                300: '#DBD6C9',
-              },
-              peach: {
-                50: '#FFF5F2',  /* Seashell - Very subtle accent */
-                100: '#FFE8DF', /* Almond - Gradient/Highlight */
-                200: '#FFD1C2',
-                400: '#FB923C', /* Orange-400 equivalent for text highlights */
-              }
-            }
-          },
-        },
-      }
-    </script>
+    
     <style>
       body {
         font-family: 'Inter', sans-serif;
@@ -50,7 +26,7 @@
 </script>
 <link rel="stylesheet" href="/index.css">
 </head>
-  <body class="bg-warm-50 text-gray-900 selection:bg-gray-900 selection:text-white">
+  <body class="font-sans bg-warm-50 text-gray-900 selection:bg-gray-900 selection:text-white">
     <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>

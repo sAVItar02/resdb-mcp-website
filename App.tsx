@@ -21,9 +21,9 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col scroll-smooth">
       <Header scrolled={scrolled} />
-      <main className="flex-grow">
+      <main className="grow scroll-smooth">
         <Hero />
         <About />
         <Stats />

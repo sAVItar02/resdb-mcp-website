@@ -5,15 +5,15 @@ export const About: React.FC = () => {
   return (
     <section id="overview" className="py-24 bg-warm-100">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-1 gap-16 items-center">
           
-          <div className="order-2 lg:order-1 relative group">
-            <div className="absolute -inset-4 bg-gradient-to-r from-warm-200 to-peach-100 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-500"></div>
+          <div className="order-1 lg:order-2 relative group">
+            <div className="absolute -inset-4 bg-linear-to-r from-warm-200 to-peach-100 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-500"></div>
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-warm-200 bg-white p-8 md:p-12 flex flex-col justify-between min-h-[400px]">
               <div className="font-mono text-xs text-gray-400 mb-4"># Server Config</div>
               <div className="space-y-4 font-mono text-sm text-gray-600">
                 <div className="flex items-center gap-3">
-                  <span className="text-peach-400 font-bold">>>></span>
+                  <span className="text-peach-400 font-bold">&gt;&gt;&gt;</span>
                   <span>Initiating ResDB Connection...</span>
                 </div>
                 <div className="flex items-center gap-3">
@@ -37,7 +37,7 @@ export const About: React.FC = () => {
             </div>
           </div>
 
-          <div className="order-1 lg:order-2">
+          <div className="order-2 lg:order-1">
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 mb-6">
               The bridge between AI<br />
               and ResilientDB.

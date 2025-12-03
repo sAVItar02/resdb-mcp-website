@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChevronDown } from 'lucide-react';
+import SystemHealthWidget from './SystemHealthWidget';
 
 export const Hero: React.FC = () => {
   return (
@@ -9,12 +10,9 @@ export const Hero: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
         
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-warm-200 text-xs font-medium text-gray-600 mb-8 animate-fade-in shadow-sm">
-          <span className="w-2 h-2 rounded-full bg-peach-200"></span>
-          Apache ResilientDB Integration
-        </div>
+        <SystemHealthWidget />
 
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-gray-900 mb-8 max-w-5xl mx-auto leading-[1.1]">
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-gray-900 mb-8 max-w-5xl mx-auto leading-[1.1] pt-10">
           Connecting AI to <br/>
           <span className="text-gray-400">Resilient Data.</span>
         </h1>
