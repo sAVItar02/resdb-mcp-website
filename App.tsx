@@ -9,6 +9,8 @@ import { Gallery } from './components/Gallery';
 import { Footer } from './components/Footer';
 import { Collaborators } from './components/Collaborators';
 
+import { McpMonitor } from './components/McpMonitor';
+
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
 
@@ -28,6 +30,7 @@ const App: React.FC = () => {
         <Hero />
         <About />
         <Stats />
+        <McpMonitor />
         <Showcase />
         <Features />
         <Gallery />
