@@ -7,6 +7,7 @@ import { Stats } from './components/Stats';
 import { Showcase } from './components/Showcase';
 import { Gallery } from './components/Gallery';
 import { Footer } from './components/Footer';
+import { Collaborators } from './components/Collaborators';
 
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -30,6 +31,7 @@ const App: React.FC = () => {
         <Showcase />
         <Features />
         <Gallery />
+        <Collaborators />
       </main>
       <Footer />
     </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, X, ArrowRight, Database } from 'lucide-react';
+import { Menu, X, Database, Github } from 'lucide-react';
 import { NavItem } from '../types';
 
 interface HeaderProps {
@@ -11,6 +11,7 @@ const navItems: NavItem[] = [
   { label: 'Metrics', href: '#stats' },
   { label: 'Capabilities', href: '#features' },
   { label: 'Docs', href: '#footer' },
+  { label: 'Team', href: '#collaborators' },
 ];
 
 export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
@@ -47,12 +48,12 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
               </a>
             ))}
             <a 
-              href="https://resilientdb.apache.org" 
+              href="https://github.com/sAVItar02/resdb-mcp-website" 
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-full hover:bg-gray-800 transition-all hover:scale-105"
             >
-              Get Started <ArrowRight className="w-4 h-4 ml-1" />
+              <Github className="w-4 h-4 mr-2" /> GitHub
             </a>
           </nav>
 
@@ -84,11 +85,13 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
             ))}
             <hr className="my-2 border-warm-200" />
             <a 
-              href="https://resilientdb.apache.org"
-              className="text-base font-medium text-gray-900"
+              href="https://github.com/sAVItar02/resdb-mcp-website"
+              className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-full hover:bg-gray-800 transition-all hover:scale-105"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Get Started
+              <Github className="w-4 h-4 mr-2" /> GitHub
             </a>
           </nav>
         </div>
