@@ -11,6 +11,12 @@ interface PromptLog {
         cpu: string;
         memory: string;
     };
+    resdb_metrics?: {
+        view: number | string;
+        sequence: number | string;
+        primary_id: number | string;
+        active_replicas: number;
+    };
 }
 
 export const McpMonitor: React.FC = () => {
@@ -64,6 +70,30 @@ export const McpMonitor: React.FC = () => {
                         </div>
                     </div>
 
+                    {/* Analytics Summary */}
+                    <div className="bg-gray-50 px-6 py-4 border-b border-gray-100 grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                            <p className="text-xs text-gray-500 uppercase font-semibold">Total Prompts</p>
+                            <p className="text-2xl font-bold text-gray-800">{prompts.length}</p>
+                        </div>
+                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                            <p className="text-xs text-gray-500 uppercase font-semibold">Avg Duration</p>
+                            <p className="text-2xl font-bold text-blue-600">
+                                {prompts.length > 0
+                                    ? (prompts.reduce((acc, p) => acc + p.duration, 0) / prompts.length * 1000).toFixed(2)
+                                    : '0.00'} ms
+                            </p>
+                        </div>
+                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                            <p className="text-xs text-gray-500 uppercase font-semibold">Latest View</p>
+                            <p className="text-2xl font-bold text-purple-600">
+                                {prompts.length > 0 && prompts[0].resdb_metrics?.view
+                                    ? prompts[0].resdb_metrics.view
+                                    : '-'}
+                            </p>
+                        </div>
+                    </div>
+
                     <div className="overflow-x-auto">
                         <table className="w-full text-left">
                             <thead className="bg-gray-50">
@@ -73,13 +103,14 @@ export const McpMonitor: React.FC = () => {
                                     <th className="px-6 py-4 text-sm font-medium text-gray-500">Arguments</th>
                                     <th className="px-6 py-4 text-sm font-medium text-gray-500">Duration</th>
                                     <th className="px-6 py-4 text-sm font-medium text-gray-500">Metrics (CPU/Mem)</th>
+                                    <th className="px-6 py-4 text-sm font-medium text-gray-500">ResDB (Seq/View)</th>
                                     <th className="px-6 py-4 text-sm font-medium text-gray-500">Result</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-100">
                                 {prompts.length === 0 ? (
                                     <tr>
-                                        <td colSpan={6} className="px-6 py-8 text-center text-gray-500">
+                                        <td colSpan={7} className="px-6 py-8 text-center text-gray-500">
                                             {loading ? 'Loading...' : 'No prompts recorded yet'}
                                         </td>
                                     </tr>
@@ -113,6 +144,20 @@ export const McpMonitor: React.FC = () => {
                                                     </div>
                                                 ) : (
                                                     <span className="text-xs text-gray-400">N/A</span>
+                                                )}
+                                            </td>
+                                            <td className="px-6 py-4 text-sm text-gray-600">
+                                                {prompt.resdb_metrics && prompt.resdb_metrics.sequence !== undefined ? (
+                                                    <div className="flex flex-col space-y-1">
+                                                        <span className="text-xs bg-purple-50 text-purple-700 px-2 py-0.5 rounded border border-purple-100">
+                                                            Seq: {prompt.resdb_metrics.sequence}
+                                                        </span>
+                                                        <span className="text-xs bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded border border-indigo-100">
+                                                            View: {prompt.resdb_metrics.view} (P: {prompt.resdb_metrics.primary_id})
+                                                        </span>
+                                                    </div>
+                                                ) : (
+                                                    <span className="text-xs text-gray-400">-</span>
                                                 )}
                                             </td>
                                             <td className="px-6 py-4 text-sm text-gray-600">
