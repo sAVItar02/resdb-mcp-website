@@ -7,6 +7,10 @@ interface PromptLog {
     result: string;
     timestamp: string;
     duration: number;
+    metrics?: {
+        cpu: string;
+        memory: string;
+    };
 }
 
 export const McpMonitor: React.FC = () => {
@@ -38,23 +42,23 @@ export const McpMonitor: React.FC = () => {
     }, []);
 
     return (
-        <section id="mcp-monitor" className="py-20 bg-gray-50 dark:bg-gray-900">
+        <section id="mcp-monitor" className="py-20 bg-white">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+                    <h2 className="text-4xl font-bold mb-4 text-gray-900">
                         ResLens MCP Monitor
                     </h2>
-                    <p className="text-xl text-gray-600 dark:text-gray-300">
+                    <p className="text-xl text-gray-500">
                         Real-time monitoring of Model Context Protocol interactions
                     </p>
                 </div>
 
-                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700">
-                    <div className="p-6 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center">
-                        <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Recent Prompts</h3>
+                <div className="bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100">
+                    <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+                        <h3 className="text-lg font-semibold text-gray-900">Recent Prompts</h3>
                         <div className="flex items-center space-x-2">
                             <span className={`inline-block w-3 h-3 rounded-full ${error ? 'bg-red-500' : 'bg-green-500 animate-pulse'}`}></span>
-                            <span className="text-sm text-gray-500 dark:text-gray-400">
+                            <span className="text-sm text-gray-500">
                                 {error ? 'Disconnected' : 'Live'}
                             </span>
                         </div>
@@ -62,41 +66,56 @@ export const McpMonitor: React.FC = () => {
 
                     <div className="overflow-x-auto">
                         <table className="w-full text-left">
-                            <thead className="bg-gray-50 dark:bg-gray-700/50">
+                            <thead className="bg-gray-50">
                                 <tr>
-                                    <th className="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400">Time</th>
-                                    <th className="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400">Tool</th>
-                                    <th className="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400">Arguments</th>
-                                    <th className="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400">Duration</th>
-                                    <th className="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400">Result</th>
+                                    <th className="px-6 py-4 text-sm font-medium text-gray-500">Time</th>
+                                    <th className="px-6 py-4 text-sm font-medium text-gray-500">Tool</th>
+                                    <th className="px-6 py-4 text-sm font-medium text-gray-500">Arguments</th>
+                                    <th className="px-6 py-4 text-sm font-medium text-gray-500">Duration</th>
+                                    <th className="px-6 py-4 text-sm font-medium text-gray-500">Metrics (CPU/Mem)</th>
+                                    <th className="px-6 py-4 text-sm font-medium text-gray-500">Result</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
+                            <tbody className="divide-y divide-gray-100">
                                 {prompts.length === 0 ? (
                                     <tr>
-                                        <td colSpan={5} className="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
+                                        <td colSpan={6} className="px-6 py-8 text-center text-gray-500">
                                             {loading ? 'Loading...' : 'No prompts recorded yet'}
                                         </td>
                                     </tr>
                                 ) : (
                                     prompts.map((prompt) => (
-                                        <tr key={prompt.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors">
-                                            <td className="px-6 py-4 text-sm text-gray-600 dark:text-gray-300 whitespace-nowrap">
+                                        <tr key={prompt.id} className="hover:bg-gray-50 transition-colors">
+                                            <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">
                                                 {new Date(prompt.timestamp).toLocaleTimeString()}
                                             </td>
                                             <td className="px-6 py-4">
-                                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
+                                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
                                                     {prompt.tool}
                                                 </span>
                                             </td>
-                                            <td className="px-6 py-4 text-sm text-gray-600 dark:text-gray-300 font-mono text-xs">
+                                            <td className="px-6 py-4 text-sm text-gray-600 font-mono text-xs">
                                                 {JSON.stringify(prompt.args).substring(0, 50)}
                                                 {JSON.stringify(prompt.args).length > 50 ? '...' : ''}
                                             </td>
-                                            <td className="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">
+                                            <td className="px-6 py-4 text-sm text-gray-600">
                                                 {(prompt.duration * 1000).toFixed(2)}ms
                                             </td>
-                                            <td className="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">
+                                            <td className="px-6 py-4 text-sm text-gray-600">
+                                                {prompt.metrics ? (
+                                                    <div className="flex space-x-2">
+                                                        <span className="text-xs bg-gray-100 px-2 py-1 rounded text-gray-600">
+                                                            CPU: {prompt.metrics.cpu}%
+                                                        </span>
+                                                        <span className="text-xs bg-gray-100 px-2 py-1 rounded text-gray-600">
+                                                            Mem: {prompt.metrics.memory}%
+                                                        </span>
+                                                    </div>
+                                                ) : (
+                                                    <span className="text-xs text-gray-400">N/A</span>
+                                                )}
+                                            </td>
+                                            <td className="px-6 py-4 text-sm text-gray-600">
                                                 <div className="max-w-xs truncate" title={prompt.result}>
                                                     {prompt.result}
                                                 </div>
