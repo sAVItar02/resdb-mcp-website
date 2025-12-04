@@ -73,12 +73,12 @@ export const Architecture: React.FC = () => {
             {/* Arrows: MCP <-> Backend */}
             <g transform="translate(590, 0)">
               {/* Top Pair */}
-              <line x1="10" y1="140" x2="60" y2="140" stroke="#9CA3AF" strokeWidth="2" markerEnd="url(#arrowhead)" />
-              <line x1="60" y1="160" x2="10" y2="160" stroke="#9CA3AF" strokeWidth="2" markerEnd="url(#arrowhead)" />
+              <line x1="10" y1="170" x2="60" y2="170" stroke="#9CA3AF" strokeWidth="2" markerEnd="url(#arrowhead)" />
+              <line x1="60" y1="190" x2="10" y2="190" stroke="#9CA3AF" strokeWidth="2" markerEnd="url(#arrowhead)" />
               
               {/* Bottom Pair */}
-              <line x1="10" y1="220" x2="60" y2="220" stroke="#9CA3AF" strokeWidth="2" markerEnd="url(#arrowhead)" />
-              <line x1="60" y1="240" x2="10" y2="240" stroke="#9CA3AF" strokeWidth="2" markerEnd="url(#arrowhead)" />
+              <line x1="10" y1="260" x2="60" y2="260" stroke="#9CA3AF" strokeWidth="2" markerEnd="url(#arrowhead)" />
+              <line x1="60" y1="280" x2="10" y2="280" stroke="#9CA3AF" strokeWidth="2" markerEnd="url(#arrowhead)" />
             </g>
 
             {/* --- ResilientDB Backend --- */}
