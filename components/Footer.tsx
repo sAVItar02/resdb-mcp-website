@@ -28,7 +28,6 @@ export const Footer: React.FC = () => {
         <div className="border-t border-warm-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
           <p>&copy; {new Date().getFullYear()} ResilientDB. Apache License 2.0.</p>
           <div className="flex gap-6">
-            <a href="https://beacon.resilientdb.com/docs" className="hover:text-gray-900 transition-colors">Documentation</a>
             <a href="https://github.com/sAVItar02/resdb-mcp-website" className="hover:text-gray-900 transition-colors">GitHub</a>
           </div>
         </div>

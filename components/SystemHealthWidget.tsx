@@ -26,7 +26,7 @@ const SystemHealthWidget = () => {
     }
 
     return (
-        <div className={`absolute left-1/2 -translate-x-1/2 w-md max-w-md bg-white border border-warm-200 rounded-lg ${isOpen ? 'shadow-lg' : ''}`}>
+        <div className={`absolute left-1/2 -translate-x-1/2 w-full max-w-md bg-white border border-warm-200 rounded-lg ${isOpen ? 'shadow-lg' : ''}`}>
             <button onClick={() => setIsOpen(!isOpen)} className="inline-flex items-center justify-between gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-gray-600 animate-fade-in hover:bg-warm-50 transition-all duration-300 cursor-pointer w-full">
                 <div className="flex items-center gap-2">
                     <span className={`w-2 h-2 rounded-full ${healthStatus.healthCount === 3 ? 'bg-green-300' : healthStatus.healthCount === 0 ? 'bg-red-300' : 'bg-yellow-300'}`}></span>

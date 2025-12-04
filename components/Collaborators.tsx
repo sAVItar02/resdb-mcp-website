@@ -24,7 +24,7 @@ export const Collaborators = () => {
 
         <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4">
           {collaborators.map((name, index) => (
-            <span 
+            <a href={`https://github.com/${githubStats[index]}`} target="_blank" rel="noopener noreferrer"
               key={index} 
               className="relative text-xl md:text-2xl font-medium text-gray-700 hover:text-peach-400 transition-colors cursor-default group"
             >
@@ -32,7 +32,7 @@ export const Collaborators = () => {
                 <img src={`https://github-readme-stats-steel-omega.vercel.app/api/top-langs?username=${githubStats[index]}&show_icons=true&locale=en&layout=compact`} alt="GitHub Stats" className="w-full h-full object-cover" />
               </div>
               {name}
-            </span>
+            </a>
           ))}
         </div>
       </div>

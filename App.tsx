@@ -10,6 +10,8 @@ import { Footer } from './components/Footer';
 import { Collaborators } from './components/Collaborators';
 
 import { McpMonitor } from './components/McpMonitor';
+import { Motivation } from './components/Motivation';
+import { Architecture } from './components/Architecture';
 
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -28,6 +30,8 @@ const App: React.FC = () => {
       <Header scrolled={scrolled} />
       <main className="grow scroll-smooth">
         <Hero />
+        <Motivation />
+        <Architecture />
         <About />
         <Stats />
         <McpMonitor />
