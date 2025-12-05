@@ -21,19 +21,9 @@ const featureList: Feature[] = [
     icon: FileCode,
   },
   {
-    title: 'KV Store Operations',
-    description: 'Rapid get and push requests to the underlying Key-Value store with integrity verification.',
-    icon: Database,
-  },
-  {
     title: 'Model Context Protocol',
     description: 'Built on the open standard for connecting AI assistants to systems. Compatible with Claude and other MCP clients.',
     icon: Terminal,
-  },
-  {
-    title: 'BFT Consensus',
-    description: 'Leverage ResilientDB’s robust Byzantine Fault Tolerance for secure and immutable data logging.',
-    icon: ShieldCheck,
   },
   {
     title: 'High Performance',

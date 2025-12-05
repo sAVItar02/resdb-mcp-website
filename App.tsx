@@ -13,6 +13,7 @@ import { McpMonitor } from './components/McpMonitor';
 import { Motivation } from './components/Motivation';
 import { Architecture } from './components/Architecture';
 import { SnakeGame } from './components/SnakeGame';
+import FutureWork from './components/FutureWork';
 
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -39,6 +40,7 @@ const App: React.FC = () => {
         <Showcase />
         <McpMonitor />
         <Features />
+        <FutureWork />
         <Collaborators />
       </main>
       <Footer />
