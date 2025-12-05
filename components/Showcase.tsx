@@ -40,7 +40,7 @@ export const Showcase: React.FC = () => {
               className={`w-[150px] py-2 rounded-full relative cursor-pointer z-10 ${tab === 'Bechmarks' ? 'text-white' : 'text-gray-900'}`}
               onClick={() => handleTabChange('Bechmarks')}
             >
-              Bechmarks
+              Benchmarks
             </button>
           </div>
         </div>
