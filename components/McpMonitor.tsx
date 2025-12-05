@@ -145,7 +145,7 @@ export const McpMonitor: React.FC = () => {
                     )}
 
                     {/* Analytics Summary */}
-                    <div className="bg-gray-50 px-6 py-4 border-b border-gray-100 grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="bg-gray-50 px-6 py-4 border-b border-gray-100 grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
                             <p className="text-xs text-gray-500 uppercase font-semibold">Total Prompts</p>
                             <p className="text-2xl font-bold text-gray-800">{prompts.length}</p>
@@ -156,14 +156,6 @@ export const McpMonitor: React.FC = () => {
                                 {prompts.length > 0
                                     ? (prompts.reduce((acc, p) => acc + p.duration, 0) / prompts.length).toFixed(2)
                                     : '0.00'} s
-                            </p>
-                        </div>
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                            <p className="text-xs text-gray-500 uppercase font-semibold">Latest View</p>
-                            <p className="text-2xl font-bold text-purple-600">
-                                {prompts.length > 0 && prompts[0].resdb_metrics?.view
-                                    ? prompts[0].resdb_metrics.view
-                                    : '-'}
                             </p>
                         </div>
                     </div>
