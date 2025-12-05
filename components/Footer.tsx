@@ -19,7 +19,7 @@ export const Footer: React.FC = () => {
           </div>
           
           <div className="flex gap-6">
-            <a href="https://github.com/sAVItar02/resdb-mcp-website" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-900 transition-colors">
+            <a href="https://github.com/rahulkanagaraj786/incubator-resilientdb" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-900 transition-colors">
               <Github className="w-5 h-5" />
             </a>
           </div>
@@ -28,7 +28,7 @@ export const Footer: React.FC = () => {
         <div className="border-t border-warm-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
           <p>&copy; {new Date().getFullYear()} ResilientDB. Apache License 2.0.</p>
           <div className="flex gap-6">
-            <a href="https://github.com/sAVItar02/resdb-mcp-website" className="hover:text-gray-900 transition-colors">GitHub</a>
+            <a href="https://github.com/rahulkanagaraj786/incubator-resilientdb" className="hover:text-gray-900 transition-colors">GitHub</a>
           </div>
         </div>
       </div>

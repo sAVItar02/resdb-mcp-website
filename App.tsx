@@ -36,11 +36,9 @@ const App: React.FC = () => {
         <Motivation />
         <Architecture />
         <About />
-        <Stats />
         <Showcase />
         <McpMonitor />
         <Features />
-        <Gallery />
         <Collaborators />
       </main>
       <Footer />
