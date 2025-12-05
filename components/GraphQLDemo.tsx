@@ -1,9 +1,9 @@
 
 import SetKeyGraphQL from '../assets/SetKeyGraphQL.png';
 import GetKeyGraphQL from '../assets/GetKeyGraphQL.png';
-import GetTransactionGraphQL from '../assets/GetTransactionGraphQL.png';
-import PostTransactionGraphQL from '../assets/PostTransactionGraphQL.png';
-import PostTransactionGraphQLAutomatic from '../assets/PostTransactionGraphQLAutomatic.png';
+import GetTransactionGraphQL from '../assets/GETTransactionGraphQL.png';
+import PostTransactionGraphQL from '../assets/POSTTransactionGraphQL.png';
+import PostTransactionGraphQLAutomatic from '../assets/POSTTransactionGraphQLAutomatic.png';
 import TransactionAnalysis from '../assets/Analysis.png';
 import DemoVideo from '../assets/GraphQLVideo.mp4';
 

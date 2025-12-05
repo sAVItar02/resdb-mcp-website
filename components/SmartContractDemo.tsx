@@ -1,4 +1,4 @@
-import DemoVideo from './../assets/SmartContractVideo.mov';
+import DemoVideo from '../assets/SmartContractVideo.mov';
 
 const SmartContractDemo = () => {
   return (
