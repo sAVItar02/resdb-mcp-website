@@ -131,7 +131,7 @@ export const About = () => {
                   <span className="flex items-center justify-center w-8 h-8 rounded-full bg-peach-100 text-peach-500 font-bold text-sm">2</span>
                   <h4 className="font-semibold text-gray-900">Get Absolute Path</h4>
                 </div>
-                <div className="bg-gray-900 rounded-lg p-4 font-mono text-xs text-gray-300 h-full flex flex-col justify-center">
+                <div className="bg-gray-900 rounded-lg p-4 font-mono text-xs text-gray-300 h-[174px] flex flex-col justify-center">
                   <div className="mb-3">
                     <span className="text-green-400 mr-2">$</span>pwd
                     <div className="text-gray-500 mt-1">/Users/username/projects/ResilientDB-MCP</div>

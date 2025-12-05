@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Menu, X, Database, Github } from 'lucide-react';
+import { Menu, X, Database, Github, Gamepad2 } from 'lucide-react';
 import { NavItem } from '../types';
 
 interface HeaderProps {
   scrolled: boolean;
+  onOpenGame: () => void;
 }
 
 const navItems: NavItem[] = [
@@ -15,8 +16,9 @@ const navItems: NavItem[] = [
   { label: 'Team', href: '#collaborators' },
 ];
 
-export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
+export const Header: React.FC<HeaderProps> = ({ scrolled, onOpenGame }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [gameOpen, setGameOpen] = useState(false);
 
   return (
     <header 
@@ -48,6 +50,16 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
                 {item.label}
               </a>
             ))}
+
+            <div className="h-4 w-px bg-gray-300"></div>
+
+            <button 
+              onClick={onOpenGame}
+              className="text-gray-400 hover:text-peach-400 transition-colors p-1"
+              title="Play Snake"
+            >
+              <Gamepad2 className="w-5 h-5" />
+            </button>
             <a 
               href="https://github.com/sAVItar02/resdb-mcp-website" 
               target="_blank"

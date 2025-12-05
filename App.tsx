@@ -12,9 +12,11 @@ import { Collaborators } from './components/Collaborators';
 import { McpMonitor } from './components/McpMonitor';
 import { Motivation } from './components/Motivation';
 import { Architecture } from './components/Architecture';
+import { SnakeGame } from './components/SnakeGame';
 
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [showGame, setShowGame] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,7 +29,8 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col scroll-smooth">
-      <Header scrolled={scrolled} />
+      <Header scrolled={scrolled} onOpenGame={() => setShowGame(true)} />
+      {showGame && <SnakeGame onClose={() => setShowGame(false)} />}
       <main className="grow scroll-smooth">
         <Hero />
         <Motivation />
