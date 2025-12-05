@@ -37,8 +37,8 @@ const App: React.FC = () => {
         <Architecture />
         <About />
         <Stats />
-        <McpMonitor />
         <Showcase />
+        <McpMonitor />
         <Features />
         <Gallery />
         <Collaborators />
