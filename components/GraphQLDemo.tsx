@@ -1,11 +1,11 @@
 
-import SetKeyGraphQL from './../assets/SetKeyGraphQL.png';
-import GetKeyGraphQL from './../assets/GetKeyGraphQL.png';
-import GetTransactionGraphQL from './../assets/GetTransactionGraphQL.png';
-import PostTransactionGraphQL from './../assets/PostTransactionGraphQL.png';
-import PostTransactionGraphQLAutomatic from './../assets/PostTransactionGraphQLAutomatic.png';
-import TransactionAnalysis from './../assets/Analysis.png';
-import DemoVideo from './../assets/GraphQLVideo.mp4';
+import SetKeyGraphQL from '../assets/SetKeyGraphQL.png';
+import GetKeyGraphQL from '../assets/GetKeyGraphQL.png';
+import GetTransactionGraphQL from '../assets/GetTransactionGraphQL.png';
+import PostTransactionGraphQL from '../assets/PostTransactionGraphQL.png';
+import PostTransactionGraphQLAutomatic from '../assets/PostTransactionGraphQLAutomatic.png';
+import TransactionAnalysis from '../assets/Analysis.png';
+import DemoVideo from '../assets/GraphQLVideo.mp4';
 
 const analysisSnippet = <div>
     <div className="flex flex-col items-start justify-start gap-2">
