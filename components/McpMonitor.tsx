@@ -198,9 +198,8 @@ export const McpMonitor: React.FC = () => {
                                                     {prompt.tool}
                                                 </span>
                                             </td>
-                                            <td className="px-6 py-4 text-sm text-gray-600 font-mono text-xs">
-                                                {JSON.stringify(prompt.args).substring(0, 50)}
-                                                {JSON.stringify(prompt.args).length > 50 ? '...' : ''}
+                                            <td className="px-6 py-4 text-sm text-gray-600 font-mono text-xs whitespace-pre-wrap break-words max-w-xs">
+                                                {JSON.stringify(prompt.args, null, 2)}
                                             </td>
                                             <td className="px-6 py-4 text-sm text-gray-600">
                                                 {prompt.duration.toFixed(2)}s
@@ -220,10 +219,8 @@ export const McpMonitor: React.FC = () => {
                                                 )}
                                             </td>
 
-                                            <td className="px-6 py-4 text-sm text-gray-600">
-                                                <div className="max-w-xs truncate" title={prompt.result}>
-                                                    {prompt.result}
-                                                </div>
+                                            <td className="px-6 py-4 text-sm text-gray-600 whitespace-pre-wrap break-words max-w-md">
+                                                {prompt.result}
                                             </td>
                                         </tr>
                                     ))
