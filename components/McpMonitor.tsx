@@ -19,19 +19,51 @@ interface PromptLog {
     };
 }
 
+interface HealthData {
+    overall_status: 'healthy' | 'degraded' | 'down';
+    timestamp: string;
+    components: {
+        replicas: {
+            status: string;
+            count: number;
+            message: string;
+        };
+        graphql_api: {
+            status: string;
+            latency?: number;
+            error?: string;
+        };
+        http_api: {
+            status: string;
+            latency?: number;
+            error?: string;
+        };
+    };
+}
+
 export const McpMonitor: React.FC = () => {
     const [prompts, setPrompts] = useState<PromptLog[]>([]);
+    const [health, setHealth] = useState<HealthData | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     const fetchPrompts = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/v1/mcp/prompts');
-            if (!response.ok) {
-                throw new Error('Failed to fetch prompts');
+            const [promptsRes, healthRes] = await Promise.all([
+                fetch('http://localhost:3000/api/v1/mcp/prompts'),
+                fetch('http://localhost:3000/api/v1/health')
+            ]);
+
+            if (promptsRes.ok) {
+                const data = await promptsRes.json();
+                setPrompts(data);
             }
-            const data = await response.json();
-            setPrompts(data);
+
+            if (healthRes.ok) {
+                const healthData = await healthRes.json();
+                setHealth(healthData);
+            }
+
             setError(null);
         } catch (err) {
             setError('Failed to connect to ResLens Middleware');
@@ -61,7 +93,7 @@ export const McpMonitor: React.FC = () => {
 
                 <div className="bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100">
                     <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
-                        <h3 className="text-lg font-semibold text-gray-900">Recent Prompts</h3>
+                        <h3 className="text-lg font-semibold text-gray-900">System Health & Recent Prompts</h3>
                         <div className="flex items-center space-x-2">
                             <span className={`inline-block w-3 h-3 rounded-full ${error ? 'bg-red-500' : 'bg-green-500 animate-pulse'}`}></span>
                             <span className="text-sm text-gray-500">
@@ -69,6 +101,48 @@ export const McpMonitor: React.FC = () => {
                             </span>
                         </div>
                     </div>
+
+                    {/* Health Status */}
+                    {health && (
+                        <div className="bg-white px-6 py-4 border-b border-gray-100 grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div className={`p-4 rounded-lg border ${health.components.replicas.status === 'healthy' ? 'bg-green-50 border-green-100' : 'bg-red-50 border-red-100'}`}>
+                                <div className="flex justify-between items-center mb-1">
+                                    <p className="text-xs font-semibold uppercase text-gray-600">Replicas</p>
+                                    <span className={`text-xs px-2 py-0.5 rounded-full ${health.components.replicas.status === 'healthy' ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'}`}>
+                                        {health.components.replicas.status}
+                                    </span>
+                                </div>
+                                <p className="text-lg font-bold text-gray-800">{health.components.replicas.count} / 5</p>
+                                <p className="text-xs text-gray-500">{health.components.replicas.message}</p>
+                            </div>
+
+                            <div className={`p-4 rounded-lg border ${health.components.graphql_api.status === 'healthy' ? 'bg-green-50 border-green-100' : 'bg-red-50 border-red-100'}`}>
+                                <div className="flex justify-between items-center mb-1">
+                                    <p className="text-xs font-semibold uppercase text-gray-600">GraphQL API</p>
+                                    <span className={`text-xs px-2 py-0.5 rounded-full ${health.components.graphql_api.status === 'healthy' ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'}`}>
+                                        {health.components.graphql_api.status}
+                                    </span>
+                                </div>
+                                <p className="text-lg font-bold text-gray-800">Port 8000</p>
+                                <p className="text-xs text-gray-500">
+                                    {health.components.graphql_api.latency ? `${health.components.graphql_api.latency}ms latency` : health.components.graphql_api.error}
+                                </p>
+                            </div>
+
+                            <div className={`p-4 rounded-lg border ${health.components.http_api.status === 'healthy' ? 'bg-green-50 border-green-100' : 'bg-red-50 border-red-100'}`}>
+                                <div className="flex justify-between items-center mb-1">
+                                    <p className="text-xs font-semibold uppercase text-gray-600">HTTP API</p>
+                                    <span className={`text-xs px-2 py-0.5 rounded-full ${health.components.http_api.status === 'healthy' ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'}`}>
+                                        {health.components.http_api.status}
+                                    </span>
+                                </div>
+                                <p className="text-lg font-bold text-gray-800">Port 18000</p>
+                                <p className="text-xs text-gray-500">
+                                    {health.components.http_api.latency ? `${health.components.http_api.latency}ms latency` : health.components.http_api.error}
+                                </p>
+                            </div>
+                        </div>
+                    )}
 
                     {/* Analytics Summary */}
                     <div className="bg-gray-50 px-6 py-4 border-b border-gray-100 grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -80,8 +154,8 @@ export const McpMonitor: React.FC = () => {
                             <p className="text-xs text-gray-500 uppercase font-semibold">Avg Duration</p>
                             <p className="text-2xl font-bold text-blue-600">
                                 {prompts.length > 0
-                                    ? (prompts.reduce((acc, p) => acc + p.duration, 0) / prompts.length * 1000).toFixed(2)
-                                    : '0.00'} ms
+                                    ? (prompts.reduce((acc, p) => acc + p.duration, 0) / prompts.length).toFixed(2)
+                                    : '0.00'} s
                             </p>
                         </div>
                         <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
@@ -135,11 +209,11 @@ export const McpMonitor: React.FC = () => {
                                             <td className="px-6 py-4 text-sm text-gray-600">
                                                 {prompt.metrics ? (
                                                     <div className="flex space-x-2">
-                                                        <span className="text-xs bg-gray-100 px-2 py-1 rounded text-gray-600">
-                                                            CPU: {prompt.metrics.cpu}%
+                                                        <span className={`text-xs bg-gray-100 px-2 py-1 rounded text-gray-600 ${Number(prompt.metrics.cpu) > 8 ? 'bg-red-100' : 'bg-green-100'}`}>
+                                                            CPU: {Number(prompt.metrics.cpu).toFixed(2)}%
                                                         </span>
-                                                        <span className="text-xs bg-gray-100 px-2 py-1 rounded text-gray-600">
-                                                            Mem: {prompt.metrics.memory}%
+                                                        <span className={`text-xs bg-gray-100 px-2 py-1 rounded text-gray-600 ${Number(prompt.metrics.memory) > 10 ? 'bg-red-100' : 'bg-green-100'}`}>
+                                                            Mem: {Number(prompt.metrics.memory).toFixed(2)}%
                                                         </span>
                                                     </div>
                                                 ) : (
