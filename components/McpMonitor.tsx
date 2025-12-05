@@ -145,7 +145,7 @@ export const McpMonitor: React.FC = () => {
                     )}
 
                     {/* Analytics Summary */}
-                    <div className="bg-gray-50 px-6 py-4 border-b border-gray-100 grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="bg-gray-50 px-6 py-4 border-b border-gray-100 grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
                             <p className="text-xs text-gray-500 uppercase font-semibold">Total Prompts</p>
                             <p className="text-2xl font-bold text-gray-800">{prompts.length}</p>
@@ -156,14 +156,6 @@ export const McpMonitor: React.FC = () => {
                                 {prompts.length > 0
                                     ? (prompts.reduce((acc, p) => acc + p.duration, 0) / prompts.length).toFixed(2)
                                     : '0.00'} s
-                            </p>
-                        </div>
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                            <p className="text-xs text-gray-500 uppercase font-semibold">Latest View</p>
-                            <p className="text-2xl font-bold text-purple-600">
-                                {prompts.length > 0 && prompts[0].resdb_metrics?.view
-                                    ? prompts[0].resdb_metrics.view
-                                    : '-'}
                             </p>
                         </div>
                     </div>
@@ -177,14 +169,13 @@ export const McpMonitor: React.FC = () => {
                                     <th className="px-6 py-4 text-sm font-medium text-gray-500">Arguments</th>
                                     <th className="px-6 py-4 text-sm font-medium text-gray-500">Duration</th>
                                     <th className="px-6 py-4 text-sm font-medium text-gray-500">Metrics (CPU/Mem)</th>
-                                    <th className="px-6 py-4 text-sm font-medium text-gray-500">ResDB (Seq/View)</th>
                                     <th className="px-6 py-4 text-sm font-medium text-gray-500">Result</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-100">
                                 {prompts.length === 0 ? (
                                     <tr>
-                                        <td colSpan={7} className="px-6 py-8 text-center text-gray-500">
+                                        <td colSpan={6} className="px-6 py-8 text-center text-gray-500">
                                             {loading ? 'Loading...' : 'No prompts recorded yet'}
                                         </td>
                                     </tr>
@@ -199,12 +190,11 @@ export const McpMonitor: React.FC = () => {
                                                     {prompt.tool}
                                                 </span>
                                             </td>
-                                            <td className="px-6 py-4 text-sm text-gray-600 font-mono text-xs">
-                                                {JSON.stringify(prompt.args).substring(0, 50)}
-                                                {JSON.stringify(prompt.args).length > 50 ? '...' : ''}
+                                            <td className="px-6 py-4 text-sm text-gray-600 font-mono text-xs whitespace-pre-wrap break-words max-w-xs">
+                                                {JSON.stringify(prompt.args, null, 2)}
                                             </td>
                                             <td className="px-6 py-4 text-sm text-gray-600">
-                                                {(prompt.duration * 1000).toFixed(2)}ms
+                                                {prompt.duration.toFixed(2)}s
                                             </td>
                                             <td className="px-6 py-4 text-sm text-gray-600">
                                                 {prompt.metrics ? (
@@ -220,24 +210,9 @@ export const McpMonitor: React.FC = () => {
                                                     <span className="text-xs text-gray-400">N/A</span>
                                                 )}
                                             </td>
-                                            <td className="px-6 py-4 text-sm text-gray-600">
-                                                {prompt.resdb_metrics && prompt.resdb_metrics.sequence !== undefined ? (
-                                                    <div className="flex flex-col space-y-1">
-                                                        <span className="text-xs bg-purple-50 text-purple-700 px-2 py-0.5 rounded border border-purple-100">
-                                                            Seq: {prompt.resdb_metrics.sequence}
-                                                        </span>
-                                                        <span className="text-xs bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded border border-indigo-100">
-                                                            View: {prompt.resdb_metrics.view} (P: {prompt.resdb_metrics.primary_id})
-                                                        </span>
-                                                    </div>
-                                                ) : (
-                                                    <span className="text-xs text-gray-400">-</span>
-                                                )}
-                                            </td>
-                                            <td className="px-6 py-4 text-sm text-gray-600">
-                                                <div className="max-w-xs truncate" title={prompt.result}>
-                                                    {prompt.result}
-                                                </div>
+
+                                            <td className="px-6 py-4 text-sm text-gray-600 whitespace-pre-wrap break-words max-w-md">
+                                                {prompt.result}
                                             </td>
                                         </tr>
                                     ))
