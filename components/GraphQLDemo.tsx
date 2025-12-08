@@ -12,7 +12,7 @@ const analysisSnippet = <div>
         <span className='text-gray-900 font-semibold'>Example</span>
         <pre className='max-w-full whitespace-pre-wrap bg-warm-50 rounded-lg p-4 border border-warm-200 wrap-break-words'>
             <code className='text-gray-900 font-mono text-sm max-w-full wrap-break-words'>
-                7c4ad839bd7943d45b1667ce2f9100d62e71d1cc6e8072c862f3bc22093b7878, invalid-id-123, 55bc8cd94c2dc8553ead0931297d2df09b41d9b614ccf50ce3efd14dd7552f81
+                Analyze the transactions 7c4ad839bd7943d45b1667ce2f9100d62e71d1cc6e8072c862f3bc22093b7878, invalid-id-123, 55bc8cd94c2dc8553ead0931297d2df09b41d9b614ccf50ce3efd14dd7552f81
             </code>
         </pre>
     </div>

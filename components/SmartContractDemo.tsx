@@ -1,4 +1,4 @@
-import DemoVideo from '../assets/SmartContractVideo.mp4';
+import DemoVideo from '../assets/SmartContractVideo.mov';
 import { useEffect, useState } from 'react';
 import CheckHealthSC from '../assets/CheckHealthSC.png';
 import CheckHealthSCFail from '../assets/CheckHealthSCFail.png';
@@ -68,7 +68,7 @@ const ImageCarousel = ({ images, alt }: { images: string[]; alt: string }) => {
 
 const SmartContractDemoItems = [
     {
-        title: 'Chech System Health',
+        title: 'Check System Health',
         description: 'Check the system health of the ResilientDB cluster.',
         image: [CheckHealthSC, CheckHealthSCFail],
     },
